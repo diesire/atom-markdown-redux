@@ -1,0 +1,19 @@
+{
+  "name": "atom-markdown-redux",
+  "main": "./lib/atom-markdown-redux",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [],
+  "activationCommands": {
+    "atom-workspace": "atom-markdown-redux:toggle"
+  },
+  "repository": "https://github.com/atom/atom-markdown-redux",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "mdast": "^2.1.0",
+    "mdast-toc": "^1.1.0"
+  }
+}
