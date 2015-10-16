@@ -1,4 +1,4 @@
-AtomMarkdownRedux = require '../lib/markdown-redux'
+AtomMarkdownRedux = require '../lib/atom-markdown-redux'
 
 describe "AtomMarkdown", ->
   [workspaceElement, activationPromise] = []
