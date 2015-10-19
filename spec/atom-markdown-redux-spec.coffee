@@ -1,57 +1,42 @@
 AtomMarkdownRedux = require '../lib/atom-markdown-redux'
 
 describe "AtomMarkdown", ->
-  [workspaceElement, activationPromise] = []
+  [workspaceElement, TEXT_WITH_TOC_01_OUTPUT] = []
 
   beforeEach ->
     workspaceElement = atom.views.getView(atom.workspace)
-    activationPromise = atom.packages.activatePackage('atom-markdown-redux')
 
-  describe "when the atom-markdown-redux:toggle event is triggered", ->
-    it "hides and shows the modal panel", ->
-      # Before the activation event the view is not on the DOM, and no panel
-      # has been created
-      expect(workspaceElement.querySelector('.atom-markdown-redux')).not.toExist()
+    waitsForPromise ->
+      atom.packages.activatePackage('atom-markdown-redux')
+    waitsForPromise ->
+      atom.workspace.open('toc.md')
 
-      # This is an activation event, triggering it will cause the package to be
-      # activated.
-      atom.commands.dispatch workspaceElement, 'atom-markdown-redux:toggle'
+    TEXT_WITH_TOC_01_OUTPUT =
+    """
+    # Table of Contents
 
-      waitsForPromise ->
-        activationPromise
+    -   [Title 1](#title-1)
+    -   [Title 2](#title-2)
 
-      runs ->
-        expect(workspaceElement.querySelector('.atom-markdown-redux')).toExist()
+    # Title 1
 
-        atomMarkdownReduxElement = workspaceElement.querySelector('.atom-markdown-redux')
-        expect(atomMarkdownReduxElement).toExist()
+    A paragraph
 
-        atomMarkdownReduxPanel = atom.workspace.panelForItem(atomMarkdownReduxElement)
-        expect(atomMarkdownReduxPanel.isVisible()).toBe true
-        atom.commands.dispatch workspaceElement, 'atom-markdown-redux:toggle'
-        expect(atomMarkdownReduxPanel.isVisible()).toBe false
+    # Title 2
 
-    it "hides and shows the view", ->
-      # This test shows you an integration test testing at the view level.
+    Another paragraph
 
-      # Attaching the workspaceElement to the DOM is required to allow the
-      # `toBeVisible()` matchers to work. Anything testing visibility or focus
-      # requires that the workspaceElement is on the DOM. Tests that attach the
-      # workspaceElement to the DOM are generally slower than those off DOM.
-      jasmine.attachToDOM(workspaceElement)
+    """
 
-      expect(workspaceElement.querySelector('.atom-markdown-redux')).not.toExist()
+  describe "waiting for the packages to load", ->
+    it 'should have waited long enough', ->
+      expect(atom.packages.isPackageActive('atom-markdown-redux')).toBe true
+      expect(atom.workspace.getActiveTextEditor().getPath()).toContain 'spec\\fixtures\\toc.md'
 
-      # This is an activation event, triggering it causes the package to be
-      # activated.
-      atom.commands.dispatch workspaceElement, 'atom-markdown-redux:toggle'
+    it "editor must be filled", ->
+      expect(atom.workspace.getActiveTextEditor().getLineCount()).toEqual 6
 
-      waitsForPromise ->
-        activationPromise
-
-      runs ->
-        # Now we can test for view visibility
-        atomMarkdownReduxElement = workspaceElement.querySelector('.atom-markdown-redux')
-        expect(atomMarkdownReduxElement).toBeVisible()
-        atom.commands.dispatch workspaceElement, 'atom-markdown-redux:toggle'
-        expect(atomMarkdownReduxElement).not.toBeVisible()
+  describe "when the atom-markdown-redux:toc event is triggered", ->
+    it "creates a TOC in the active editor", ->
+      atom.commands.dispatch workspaceElement, 'atom-markdown-redux:toc'
+      expect(atom.workspace.getActiveTextEditor().getText()).toEqual TEXT_WITH_TOC_01_OUTPUT

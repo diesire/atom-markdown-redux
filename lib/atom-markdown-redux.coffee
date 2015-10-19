@@ -16,6 +16,7 @@ module.exports = AtomMarkdownRedux =
 
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-markdown-redux:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-markdown-redux:toc': => @toc()
 
   deactivate: ->
     @modalPanel.destroy()
@@ -32,3 +33,10 @@ module.exports = AtomMarkdownRedux =
       @modalPanel.hide()
     else
       @modalPanel.show()
+
+  toc: ->
+    console.log 'AtomMarkdownRedux creating TOC!'
+
+    sourceText = atom.workspace.getActiveTextEditor().getText()
+    outputText = new MarkdownRedux().toc sourceText
+    atom.workspace.getActiveTextEditor().setText outputText
