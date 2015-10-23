@@ -4,6 +4,10 @@
     {
       'label': 'Toggle atom-markdown-redux'
       'command': 'atom-markdown-redux:toggle'
+    },
+    {
+      'label': 'atom-markdown-redux create TOC'
+      'command': 'atom-markdown-redux:toc'
     }
   ]
 'menu': [
@@ -15,6 +19,10 @@
         {
           'label': 'Toggle'
           'command': 'atom-markdown-redux:toggle'
+        },
+        {
+          'label': 'TOC'
+          'command': 'atom-markdown-redux:toc'
         }
       ]
     ]

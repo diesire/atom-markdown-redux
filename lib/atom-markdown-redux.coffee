@@ -38,5 +38,6 @@ module.exports = AtomMarkdownRedux =
     console.log 'AtomMarkdownRedux creating TOC!'
 
     sourceText = atom.workspace.getActiveTextEditor().getText()
-    outputText = new MarkdownRedux().toc sourceText
-    atom.workspace.getActiveTextEditor().setText outputText
+    toc = new MarkdownRedux().toc sourceText
+    range = [[toc.asAST.children[0].position.start.line - 1, toc.asAST.children[0].position.start.column - 1], [toc.asAST.children[0].position.end.line - 1, toc.asAST.children[0].position.end.column - 1]]
+    atom.workspace.getActiveTextEditor().setTextInBufferRange(range, toc.asString)
