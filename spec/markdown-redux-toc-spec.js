@@ -44,23 +44,52 @@ const TEXT_WITH_TOC_03_OUTPUT =
 -   [Title 2](#title-2)
 `
 
+function generateTOC(toc) {
+  let input =
+  `# ${toc}\n# Title 1\nA paragraph\n# Title 2\nAnother paragraph`
+
+  let output =
+  `# ${toc}\n\n-   [Title 1](#title-1)\n-   [Title 2](#title-2)\n`
+  return {input, output}
+}
+
 describe("MarkdownReduxToc", function() {
   describe("method toc", function() {
-    describe("when finds the header 'toc'", function() {
-      it("returns a String", function() {
-        expect(new MarkdownReduxToc(TEXT_WITH_TOC_03_INPUT).toc().asString).toEqual(TEXT_WITH_TOC_03_OUTPUT);
+    let corpus, pair
+
+    corpus = 'toc'
+    describe(`when finds the header ${corpus}`, function() {
+      it("returns TOC as a String", function() {
+        pair = generateTOC(corpus)
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
+        pair = generateTOC(corpus.toUpperCase())
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
+        pair = generateTOC(corpus.toLowerCase())
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
       });
     });
 
-    describe("when finds the header 'Table of Contents'", function() {
-      it("returns a String", function() {
-        expect(new MarkdownReduxToc(TEXT_WITH_TOC_01_INPUT).toc().asString).toEqual(TEXT_WITH_TOC_01_OUTPUT);
+    corpus = 'Table of Contents'
+    describe(`when finds the header ${corpus}`, function() {
+      it("returns TOC as a String", function() {
+        pair = generateTOC(corpus)
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
+        pair = generateTOC(corpus.toUpperCase())
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
+        pair = generateTOC(corpus.toLowerCase())
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
       });
     });
 
-    describe("when finds the header 'table-of-contents'", function() {
-      it("returns a String", function() {
-        expect(new MarkdownReduxToc(TEXT_WITH_TOC_02_INPUT).toc().asString).toEqual(TEXT_WITH_TOC_02_OUTPUT);
+    corpus = 'table-of-contents'
+    describe(`when finds the header ${corpus}`, function() {
+      it("returns TOC as a String", function() {
+        pair = generateTOC(corpus)
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
+        pair = generateTOC(corpus.toUpperCase())
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
+        pair = generateTOC(corpus.toLowerCase())
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
       });
     });
   });
