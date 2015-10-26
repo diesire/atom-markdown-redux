@@ -2,48 +2,6 @@
 
 import MarkdownReduxToc from '../lib/markdown-redux-toc';
 
-const TEXT_WITH_TOC_01_INPUT =
-`# Table of Contents
-# Title 1
-A paragraph
-# Title 2
-Another paragraph`
-
-const TEXT_WITH_TOC_01_OUTPUT =
-`# Table of Contents
-
--   [Title 1](#title-1)
--   [Title 2](#title-2)
-`
-
-const TEXT_WITH_TOC_02_INPUT =
-`# table-of-contents
-# Title 1
-A paragraph
-# Title 2
-Another paragraph`
-
-const TEXT_WITH_TOC_02_OUTPUT =
-`# table-of-contents
-
--   [Title 1](#title-1)
--   [Title 2](#title-2)
-`
-
-const TEXT_WITH_TOC_03_INPUT =
-`# table-of-contents
-# Title 1
-A paragraph
-# Title 2
-Another paragraph`
-
-const TEXT_WITH_TOC_03_OUTPUT =
-`# table-of-contents
-
--   [Title 1](#title-1)
--   [Title 2](#title-2)
-`
-
 function generateTOC(toc) {
   let input =
   `# ${toc}\n# Title 1\nA paragraph\n# Title 2\nAnother paragraph`
