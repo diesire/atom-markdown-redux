@@ -48,5 +48,16 @@ describe("MarkdownReduxToc", function() {
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
       });
     });
+
+    describe(`when does not find proper header`, function() {
+      it("changes nothing", function() {
+        let corpus = 'Summary'
+        let pair = generateTOC(corpus)
+        expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual('');
+        expect(new MarkdownReduxToc(pair.input).toc().asAST.children.length).toEqual(0);
+      });
+    });
+
+    // TODO: add test with header + body
   });
 });
