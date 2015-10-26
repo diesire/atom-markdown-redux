@@ -13,12 +13,10 @@ function generateTOC(toc) {
 
 describe("MarkdownReduxToc", function() {
   describe("method toc", function() {
-    let corpus, pair
-
-    corpus = 'toc'
-    describe(`when finds the header ${corpus}`, function() {
+    describe(`when finds the header Toc`, function() {
       it("returns TOC as a String", function() {
-        pair = generateTOC(corpus)
+        let corpus = 'Toc'
+        let pair = generateTOC(corpus)
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
         pair = generateTOC(corpus.toUpperCase())
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
@@ -27,10 +25,10 @@ describe("MarkdownReduxToc", function() {
       });
     });
 
-    corpus = 'Table of Contents'
-    describe(`when finds the header ${corpus}`, function() {
+    describe(`when finds the header Table of Contents`, function() {
       it("returns TOC as a String", function() {
-        pair = generateTOC(corpus)
+        let corpus = 'Table of Contents'
+        let pair = generateTOC(corpus)
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
         pair = generateTOC(corpus.toUpperCase())
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
@@ -39,10 +37,10 @@ describe("MarkdownReduxToc", function() {
       });
     });
 
-    corpus = 'table-of-contents'
-    describe(`when finds the header ${corpus}`, function() {
+    describe(`when finds the header table-of-contents`, function() {
       it("returns TOC as a String", function() {
-        pair = generateTOC(corpus)
+        let corpus = 'Table-of-Contents'
+        let pair = generateTOC(corpus)
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
         pair = generateTOC(corpus.toUpperCase())
         expect(new MarkdownReduxToc(pair.input).toc().asString).toEqual(pair.output);
