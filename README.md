@@ -1,4 +1,4 @@
-# atom-markdown-redux package
+# markdown-redux package
 
 A short description of your package.
 

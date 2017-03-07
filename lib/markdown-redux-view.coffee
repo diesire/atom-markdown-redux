@@ -1,13 +1,13 @@
 module.exports =
-class AtomMarkdownReduxView
+class MarkdownReduxView
   constructor: (serializedState) ->
     # Create root element
     @element = document.createElement('div')
-    @element.classList.add('atom-markdown-redux')
+    @element.classList.add('markdown-redux')
 
     # Create message element
     message = document.createElement('div')
-    message.textContent = "The AtomMarkdownRedux package is Alive! It's ALIVE!"
+    message.textContent = "The MarkdownRedux package is Alive! It's ALIVE!"
     message.classList.add('message')
     @element.appendChild(message)
 
